@@ -1,4 +1,4 @@
-// Ponder Engine CDN Bundle (auto-injects CSS, DOM shell, modules G & A, engine & chat)
+// Ponder Engine CDN Bundle (auto-injects CSS, DOM shell, modules G & A, multilingual engine & AI tutor)
 (function(){
   window.BR='#d9a441';window.WH='#e9e4d6';window.MU='#a39d8c';window.FL='#3b3320';
   window.fr=(a,b)=>'<span class="fr"><span>'+a+'</span><span>'+b+'</span></span>';
@@ -70,29 +70,61 @@ window.G ={
    let n=[-u[1],u[0]];const d=n[0]*(ab[0]-o[0])+n[1]*(ab[1]-o[1]);if(d<-1)n=[-n[0],-n[1]];else if(Math.abs(d)<=1&&off<0)n=[-n[0],-n[1]];
    const D=Math.abs(off)||34,p=v=>[v[0]+n[0]*D,v[1]+n[1]*D],pa=p(a),pb=p(b),m=G.mid(pa,pb);
    const wx=Math.max(15,String(t).length*7+10),wy=14,g=Math.min(l*.35,1/Math.hypot(u[0]/wx,u[1]/wy)),ml=[m[0]-u[0]*g,m[1]-u[1]*g],mr=[m[0]+u[0]*g,m[1]+u[1]*g];
-   const tk=v=>`<path data-tk="1" d="M${v[0]-n[0]*5} ${v[1]-n[1]*5} L${v[0]+n[0]*5} ${v[1]+n[1]*5}" fill="none" stroke="${c}" stroke-width="1.2"/>`;
-   return `<g data-c="${m[0]},${m[1]}">`+G.seg(ml,pa,c,1.2)+G.seg(mr,pb,c,1.2)+tk(pa)+tk(pb)+`<g font-size="20"><text x="${m[0]}" y="${m[1]}" text-anchor="middle" dominant-baseline="central" fill="${BR}">${t}</text></g></g>`}
+   const tc=c===BR?BR:WH,tk=v=>`<path data-tk="1" d="M${v[0]-n[0]*5} ${v[1]-n[1]*5} L${v[0]+n[0]*5} ${v[1]+n[1]*5}" fill="none" stroke="${c}" stroke-width="1.2"/>`;
+   return `<g data-c="${m[0]},${m[1]}">`+G.seg(ml,pa,c,1.2)+G.seg(mr,pb,c,1.2)+tk(pa)+tk(pb)+`<g font-size="20"><text x="${m[0]}" y="${m[1]}" text-anchor="middle" dominant-baseline="central" fill="${tc}">${t}</text></g></g>`}
 };
   function boot(E,S){
     if(!E||!S||window.__ponder)return;
-    if(!document.getElementById('app'))document.body.insertAdjacentHTML('afterbegin',"<div id=\"app\" class=\"m-scene\">\n<header><div class=\"br\"><div class=\"ic\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\"><path d=\"M3 16 L17 16 L6 5 Z\" fill=\"none\" stroke=\"#d9a441\" stroke-width=\"1.5\"/></svg></div><div><div class=\"m\" id=\"tag\"></div><div class=\"tt\" id=\"ttl\"></div></div></div>\n<div class=\"seg\"><i id=\"sw\"></i><button class=\"t on\" data-m=\"scene\">1 · Сцена</button><button class=\"t\" data-m=\"razbor\">2 · Разбор</button><button class=\"t\" data-m=\"konspekt\">3 · Конспект</button></div></header>\n<main>\n<div class=\"pane ps\"><div id=\"stage\"><div id=\"svgw\" class=\"sv\"></div><div id=\"leader\"><div id=\"dot\"></div></div><div class=\"p\" id=\"plq\"></div></div></div>\n<div class=\"pane pn\"><aside id=\"notes\"></aside></div>\n<div class=\"pane pd\"><div id=\"doc\"></div></div>\n<div class=\"pane pc\"><aside id=\"chat\"><div class=\"ch\"><span class=\"m\">СПРОСИТЬ</span><span class=\"m\">Q · закрыть</span></div><div class=\"cx\"><i></i><span class=\"m\" id=\"ctx\" style=\"color:var(--tx)\"></span></div>\n<div id=\"log\"></div><div class=\"qa\"></div>\n<div class=\"in\"><input id=\"inp\" placeholder=\"Спросите про этот шаг…\" autocomplete=\"off\"><button id=\"snd\">↵</button></div></aside></div>\n</main>\n<footer><button class=\"b\" id=\"bp\" title=\"Назад\">‹<i>←</i></button><button class=\"b\" id=\"bn\" title=\"Вперёд\">›<i>→</i></button><button class=\"b\" id=\"br\" title=\"Сначала\">↻<i>S</i></button><button class=\"b\" id=\"bq\" title=\"Спросить\">?<i>Q</i></button>\n<div id=\"tl\"><div class=\"tr\"></div><div id=\"fl\"></div><div id=\"mk\"></div></div><div class=\"m\" id=\"lbl\"></div></footer></div>");
+    if(!document.getElementById('app'))document.body.insertAdjacentHTML('afterbegin',"<div id=\"app\" class=\"m-scene\">\n<header><div class=\"br\"><div class=\"ic\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\"><path d=\"M3 16 L17 16 L6 5 Z\" fill=\"none\" stroke=\"#d9a441\" stroke-width=\"1.5\"/></svg></div><div><div class=\"m\" id=\"tag\"></div><div class=\"tt\" id=\"ttl\"></div></div></div>\n<div class=\"seg\"><i id=\"sw\"></i><button class=\"t on\" data-m=\"scene\">1 · Stage</button><button class=\"t\" data-m=\"razbor\">2 · Breakdown</button><button class=\"t\" data-m=\"konspekt\">3 · Summary</button></div></header>\n<main>\n<div class=\"pane ps\"><div id=\"stage\"><div id=\"svgw\" class=\"sv\"></div><div id=\"leader\"><div id=\"dot\"></div></div><div class=\"p\" id=\"plq\"></div></div></div>\n<div class=\"pane pn\"><aside id=\"notes\"></aside></div>\n<div class=\"pane pd\"><div id=\"doc\"></div></div>\n<div class=\"pane pc\"><aside id=\"chat\"><div class=\"ch\"><span class=\"m\" id=\"ch-a\">ASK · AI</span><span class=\"m\" id=\"ch-c\">Q · close</span></div><div class=\"cx\"><i></i><span class=\"m\" id=\"ctx\" style=\"color:var(--tx)\"></span></div>\n<div id=\"log\"></div><div class=\"qa\"></div>\n<div class=\"in\"><input id=\"inp\" placeholder=\"Ask about this step…\" autocomplete=\"off\"><button id=\"snd\">↵</button></div></aside></div>\n</main>\n<footer><button class=\"b\" id=\"bp\" title=\"Previous\">‹<i>←</i></button><button class=\"b\" id=\"bn\" title=\"Next\">›<i>→</i></button><button class=\"b\" id=\"br\" title=\"Replay\">↻<i>S</i></button><button class=\"b\" id=\"bq\" title=\"Ask\">?<i>Q</i></button>\n<div id=\"tl\"><div class=\"tr\"></div><div id=\"fl\"></div><div id=\"mk\"></div></div><div class=\"m\" id=\"lbl\"></div></footer></div>");
     const G=window.G,A=window.A,BR=window.BR,WH=window.WH,MU=window.MU,FL=window.FL,fr=window.fr;
-    // ===== ДВИЖОК: нормализация данных (защита от ошибок модели), удерживаемый DOM и анимации =====
-S.quick=Array.isArray(S.quick)&&S.quick.length?S.quick:['Объясни проще','Почему так?','Похожая задача'];
+    // ===== ENGINE: data normalization, 10-language i18n with English fallback, retained SVG DOM & animations =====
+const I18N={
+  en:{s1:'1 · Stage',s2:'2 · Breakdown',s3:'3 · Summary',ask:'ASK · AI',cls:'Q · close',ph:'Ask about this step…',b:['Previous','Next','Replay','Ask'],st:(i,n)=>`Step ${i} of ${n}`,nh:n=>`Breakdown · ${n} steps`,sum:'Summary',thk:'… thinking',err:'Could not get a response. Please try again in a moment.',ok:'✓ construction and answer verified',er:'✗ verification failed',tg:'Breakdown',tt:'Problem',q:['Explain simpler','Why is that?','Similar problem'],sw:'step'},
+  es:{s1:'1 · Escena',s2:'2 · Desglose',s3:'3 · Resumen',ask:'PREGUNTAR · IA',cls:'Q · cerrar',ph:'Pregunta sobre este paso…',b:['Anterior','Siguiente','Repetir','Preguntar'],st:(i,n)=>`Paso ${i} de ${n}`,nh:n=>`Explicación · ${n} pasos`,sum:'Resumen',thk:'… pensando',err:'No se pudo obtener respuesta. Inténtalo de nuevo en unos segundos.',ok:'✓ construcción y respuesta verificadas',er:'✗ error de verificación',tg:'Desglose',tt:'Problema',q:['Explícalo más simple','¿Por qué es así?','Problema similar'],sw:'paso'},
+  zh:{s1:'1 · 演示',s2:'2 · 解析',s3:'3 · 讲义',ask:'提问 · AI',cls:'Q · 关闭',ph:'询问关于这一步的问题…',b:['上一步','下一步','重播','提问'],st:(i,n)=>`第 ${i} / ${n} 步`,nh:n=>`详细解析 · 共 ${n} 步`,sum:'讲义',thk:'… 思考中',err:'暂时无法获取回答，请稍后再试。',ok:'✓ 作图与答案已验证',er:'✗ 验证未通过',tg:'解析',tt:'题目',q:['讲得更简单些','为什么会这样？','类似题目'],sw:'步'},
+  pt:{s1:'1 · Cena',s2:'2 · Análise',s3:'3 · Resumo',ask:'PERGUNTAR · IA',cls:'Q · fechar',ph:'Pergunte sobre este passo…',b:['Anterior','Próximo','Repetir','Perguntar'],st:(i,n)=>`Passo ${i} de ${n}`,nh:n=>`Explicação · ${n} passos`,sum:'Resumo',thk:'… pensando',err:'Não foi possível obter resposta. Tente novamente em instantes.',ok:'✓ construção e resposta verificadas',er:'✗ erro na verificação',tg:'Análise',tt:'Problema',q:['Explique mais simples','Por que isso acontece?','Problema semelhante'],sw:'passo'},
+  ru:{s1:'1 · Сцена',s2:'2 · Разбор',s3:'3 · Конспект',ask:'СПРОСИТЬ · ИИ',cls:'Q · закрыть',ph:'Спросите про этот шаг…',b:['Назад','Вперёд','Сначала','Спросить'],st:(i,n)=>`Шаг ${i} из ${n}`,nh:n=>`Пояснения · ${n} шагов`,sum:'Конспект',thk:'… думаю',err:'Не удалось получить ответ. Попробуйте повторить вопрос через пару секунд.',ok:'✓ построение и ответ проверены',er:'✗ ошибка проверки',tg:'Разбор',tt:'Задача',q:['Объясни проще','Почему так?','Похожая задача'],sw:'шаг'},
+  uk:{s1:'1 · Сцена',s2:'2 · Розбір',s3:'3 · Конспект',ask:'ЗАПИТАТИ · ШІ',cls:'Q · закрити',ph:'Запитайте про цей крок…',b:['Назад','Далі','Спочатку','Запитати'],st:(i,n)=>`Крок ${i} з ${n}`,nh:n=>`Пояснення · ${n} кроків`,sum:'Конспект',thk:'… думаю',err:'Не вдалося отримати відповідь. Спробуйте повторити запитання за кілька секунд.',ok:'✓ побудову та відповідь перевірено',er:'✗ помилка перевірки',tg:'Розбір',tt:'Задача',q:['Поясни простіше','Чому саме так?','Схожа задача'],sw:'крок'},
+  ja:{s1:'1 · ステージ',s2:'2 · 解説',s3:'3 · まとめ',ask:'質問する · AI',cls:'Q · 閉じる',ph:'このステップについて質問…',b:['前へ','次へ','最初から','質問'],st:(i,n)=>`ステップ ${i} / ${n}`,nh:n=>`解説 · 全 ${n} ステップ`,sum:'まとめ',thk:'… 考え中',err:'応答を取得できませんでした。もう一度お試しください。',ok:'✓ 作図と解答を検証済み',er:'✗ 検証エラー',tg:'解説',tt:'問題',q:['もっと簡単に説明して','なぜそうなるの？','類題を見せて'],sw:'ステップ'},
+  de:{s1:'1 · Szene',s2:'2 · Analyse',s3:'3 · Skript',ask:'FRAGEN · KI',cls:'Q · schließen',ph:'Frage zu diesem Schritt…',b:['Zurück','Weiter','Neu starten','Fragen'],st:(i,n)=>`Schritt ${i} von ${n}`,nh:n=>`Erklärungen · ${n} Schritte`,sum:'Skript',thk:'… denke nach',err:'Keine Antwort erhalten. Bitte versuche es gleich noch einmal.',ok:'✓ Konstruktion und Ergebnis geprüft',er:'✗ Prüfungsfehler',tg:'Analyse',tt:'Aufgabe',q:['Einfacher erklären','Warum ist das so?','Ähnliche Aufgabe'],sw:'Schritt'},
+  fr:{s1:'1 · Scène',s2:'2 · Analyse',s3:'3 · Résumé',ask:'DEMANDER · IA',cls:'Q · fermer',ph:'Posez une question sur cette étape…',b:['Précédent','Suivant','Rejouer','Demander'],st:(i,n)=>`Étape ${i} sur ${n}`,nh:n=>`Explications · ${n} étapes`,sum:'Résumé',thk:'… réflexion',err:'Impossible d’obtenir une réponse. Réessayez dans un instant.',ok:'✓ construction et réponse vérifiées',er:'✗ erreur de vérification',tg:'Analyse',tt:'Problème',q:['Explique plus simplement','Pourquoi est-ce ainsi ?','Problème similaire'],sw:'étape'},
+  ko:{s1:'1 · 스테이지',s2:'2 · 풀이',s3:'3 · 요약 노트',ask:'질문하기 · AI',cls:'Q · 닫기',ph:'이 단계에 대해 질문하기…',b:['이전','다음','다시 재생','질문'],st:(i,n)=>`단계 ${i} / ${n}`,nh:n=>`상세 풀이 · 총 ${n}단계`,sum:'요약 노트',thk:'… 생각 중',err:'응답을 가져오지 못했습니다. 잠시 후 다시 시도해 주세요.',ok:'✓ 작도 및 정답 검증 완료',er:'✗ 검증 오류',tg:'풀이',tt:'문제',q:['더 쉽게 설명해 줘','왜 그렇게 돼?','비슷한 문제'],sw:'단계'}
+};
+const nt=s=>{try{return typeof s.notes==='function'?s.notes():String(s.notes||'')}catch(_){return ''}};
+function detectLang(){
+  const raw=[S.title,S.tag,S.given,...(S.steps||[]).map(s=>s.cap+' '+nt(s))].join(' ');
+  const hl=String(S.lang||document.documentElement.lang||'').toLowerCase().split(/[-_]/)[0];
+  if(/[іїєґІЇЄҐ]/.test(raw))return 'uk';
+  if(/[ыэъёЫЭЪЁ]/.test(raw))return 'ru';
+  if(/[\uAC00-\uD7AF]/.test(raw))return 'ko';
+  if(/[\u3040-\u30FF]/.test(raw))return 'ja';
+  if(/[\u4E00-\u9FFF]/.test(raw))return hl==='ja'?'ja':'zh';
+  if(I18N[hl])return hl;
+  if(/[а-яА-Я]/.test(raw))return 'uk';
+  return 'en';
+}
+const LANG=detectLang(),L10N={...I18N.en,...(I18N[LANG]||{}),...(S.ui||{})};
+document.documentElement.lang=LANG;
+S.quick=Array.isArray(S.quick)&&S.quick.length?S.quick:L10N.q;
 S.hl=Array.isArray(S.hl)?S.hl.filter(Boolean).map(String):[];
 E.forEach((e,i)=>{e.id=String(e.id??i);e.at=+e.at||0;const fn=e.f;e.f=o=>{try{return fn(!!o)||''}catch(_){return ''}};e.f(false)});
 E.forEach(e=>{e._a=e.f(false);e._b=e.f(true)});
-// авто-ранжирование слоёв: -1 сетка/оси -> 0 заливки -> 1 линии/дуги -> 2 размерные выноски -> 3 точки и подписи
+// auto z-ordering: -1 axes/grid -> 0 fills -> 1 lines/arcs -> 2 ticks/dims -> 3 dots & labels
 const zRank=h=>/data-bg/.test(h)?-1:/<circle|<text/.test(h)&&!/data-tk/.test(h)?3:/data-tk/.test(h)?2:/fill="(?!none)[^"]+"/.test(h)&&!/stroke="(?!none)[^"]+"/.test(h)?0:1;
 E.sort((a,b)=>zRank(a._a||a._b)-zRank(b._a||b._b)||a.at-b.at);
 const eIds=new Set(E.map(e=>e.id));
 S.steps.forEach((st,i)=>{st.cap=String(st.cap||'');st.focus=Array.isArray(st.focus)?st.focus.map(String):st.focus?[String(st.focus)]:[];
   if(!st.anchor||!eIds.has(String(st.anchor)))st.anchor=st.focus.find(id=>eIds.has(id))||(E.filter(e=>e.at<=i).pop()||E[0])?.id});
 const N=S.steps.length,$=s=>document.querySelector(s),app=$('#app');
+// localize static shell UI
+$('.t[data-m="scene"]').textContent=L10N.s1;$('.t[data-m="razbor"]').textContent=L10N.s2;$('.t[data-m="konspekt"]').textContent=L10N.s3;
+$('#ch-a').textContent=L10N.ask;$('#ch-c').textContent=L10N.cls;$('#inp').placeholder=L10N.ph;
+['#bp','#bn','#br','#bq'].forEach((id,i)=>$(id).title=L10N.b[i]);
 const NS='http://www.w3.org/2000/svg',OUT='cubic-bezier(.22,1,.36,1)',IO='cubic-bezier(.65,0,.35,1)',POP='cubic-bezier(.34,1.56,.64,1)';
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches,D=ms=>RM?0:ms;
 let cur=0,mode='scene',timer=null,hist=[],first=true;
-const nt=s=>{try{return typeof s.notes==='function'?s.notes():String(s.notes||'')}catch(_){return ''}};
+const chkFn=typeof check==='function'?check:typeof window.check==='function'?window.check:null;
+const noteHtml=(s,i)=>{let h=nt(s);if(i===N-1&&chkFn&&!/class=["']ok["']/.test(h)){let ok=false;try{ok=!!chkFn()}catch(_){}h+=`<span class="ok">${ok?L10N.ok:L10N.er}</span>`}return h};
 const fadeTo=(el,to,ms)=>{const from=+getComputedStyle(el).opacity;el.getAnimations().forEach(a=>a.cancel());el.style.opacity=to;
   if(D(ms))el.animate([{opacity:from},{opacity:to}],{duration:D(ms),easing:IO})};
 function fitVB(){const s=document.createElementNS(NS,'svg');s.setAttribute('class','sv');s.setAttribute('style','position:absolute;visibility:hidden;width:0;height:0');
@@ -103,7 +135,6 @@ const VB=fitVB();
 const vis=(e,i)=>e.at<=i&&(!e.only||S.steps[i].focus.includes(e.id));
 function svgStatic(i){const foc=S.steps[i].focus;
   return `<svg viewBox="${VB}" preserveAspectRatio="xMidYMid meet">`+E.filter(e=>vis(e,i)).map(e=>`<g>${foc.includes(e.id)?e._b:e._a}</g>`).join('')+`</svg>`}
-// живая сцена: каждый элемент создаётся один раз, дальше только показывается, скрывается и подсвечивается
 const svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox',VB);svg.setAttribute('preserveAspectRatio','xMidYMid meet');
 const defs=document.createElementNS(NS,'defs');svg.appendChild(defs);$('#svgw').appendChild(svg);
 const layer=h=>{const l=document.createElementNS(NS,'g');l.innerHTML=h;return l};
@@ -111,7 +142,7 @@ const L=E.map(e=>{const g=document.createElementNS(NS,'g');g.id='e-'+e.id;g.styl
   const a=e._a,b=e._b,lo=layer(a),lh=a===b?null:layer(b);g.appendChild(lo);if(lh){lh.style.opacity=0;g.appendChild(lh)}
   return{e,g,lo,lh,on:false,hot:false}});
 let mid=0;
-function reveal(p,delay){ // штриховая линия проявляется маской, сплошная прорисовывается
+function reveal(p,delay){
   if(!p.hasAttribute('stroke-dasharray')){p.setAttribute('pathLength',1);
     p.animate([{strokeDasharray:'1 1',strokeDashoffset:1},{strokeDasharray:'1 1',strokeDashoffset:0}],{duration:D(800),delay,easing:OUT,fill:'backwards'});return}
   const id='mk'+(mid++),m=document.createElementNS(NS,'mask');m.setAttribute('id',id);m.setAttribute('maskUnits','userSpaceOnUse');
@@ -133,7 +164,6 @@ function heat(l,hot,anim){if(!l.lh||l.hot===hot)return;l.hot=hot;const ms=anim?4
 function sync(){const foc=S.steps[cur].focus;let k=0;
   L.forEach(l=>{const want=vis(l.e,cur),hot=foc.includes(l.e.id);
     if(want&&!l.on){heat(l,hot,false);enter(l,k++*110)}else if(!want&&l.on)leave(l);else if(want)heat(l,hot,true)})}
-// плашка, выноска, якорь
 function place(){const pl=$('#plq'),ld=$('#leader');if(mode!=='scene'){ld.style.opacity=0;svg.querySelectorAll('circle').forEach(ci=>ci.style.opacity='');return}
   const st=S.steps[cur],el=$('#e-'+st.anchor);if(!el&&!st.pt)return;const s=$('#stage').getBoundingClientRect();let ax,ay;
   const dc=st.pt||(el&&el.querySelector('[data-c]')?.dataset.c.split(',').map(Number));
@@ -144,7 +174,7 @@ function place(){const pl=$('#plq'),ld=$('#leader');if(mode!=='scene'){ld.style.
   pl.style.top=cy+'px';
   if(ax>x0){ld.style.top=ay+'px';ld.style.width=ax-x0+'px';ld.style.opacity=1}
   else{ld.style.width='0px';ld.style.opacity=0}}
-const hlText=(cap,hl)=>hl.reduce((t,w)=>{const esc=w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return t.replace(new RegExp(`(?<![A-Za-zА-Яа-яЁё0-9_])${esc}(?![A-Za-zА-Яа-яЁё0-9_])`,'g'),`<span class="k">${w}</span>`)},cap);
+const hlText=(cap,hl)=>hl.reduce((t,w)=>{const esc=w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return t.replace(new RegExp(`(?<![\\p{L}\\p{N}_])${esc}(?![\\p{L}\\p{N}_])`,'gu'),`<span class="k">${w}</span>`)},cap);
 function setPlaque(html){const p=$('#plq');if(p.dataset.h===html)return;p.dataset.h=html;p.getAnimations().forEach(a=>a.cancel());p.innerHTML=html;
   if(D(1)&&!first&&mode==='scene')p.animate([{opacity:0},{opacity:1}],{duration:D(380),easing:IO})}
 function render(){const st=S.steps[cur];
@@ -155,7 +185,8 @@ function render(){const st=S.steps[cur];
   const pct=N>1?cur/(N-1)*100:100;
   $('#fl').style.width=pct+'%';$('#mk').style.left=pct+'%';
   document.querySelectorAll('.tk').forEach((e,i)=>e.classList.toggle('d',i<=cur));
-  $('#lbl').textContent=`Шаг ${cur+1} из ${N} · ${st.cap}`;$('#ctx').textContent=`Шаг ${cur+1} из ${N} · ${st.cap}`;
+  const stepTxt=`${L10N.st(cur+1,N)} · ${st.cap}`;
+  $('#lbl').textContent=stepTxt;$('#ctx').textContent=stepTxt;
   requestAnimationFrame(place);first=false}
 function go(i){i=Math.max(0,Math.min(N-1,i));if(i===cur)return;cur=i;render()}
 function reveal2(smooth){const n=$('#notes'),on=$('.st.on');if(!on)return;n.scrollTo({top:Math.max(0,on.offsetTop-(n.clientHeight-on.offsetHeight)/2),behavior:smooth&&!RM?'smooth':'auto'})}
@@ -168,14 +199,12 @@ function toggleChat(){const open=app.classList.toggle('chat-on');$('#bq').classL
   if(!open)$('#inp').blur();track(900)}
 function play(){stop();cur=-1;go(0);$('#br').classList.add('on');timer=setInterval(()=>{if(cur>=N-1)return stop();go(cur+1)},3600)}
 function stop(){clearInterval(timer);timer=null;$('#br').classList.remove('on')}
-// заголовок, таймлайн, пояснения, конспект
-$('#tag').textContent=S.tag||'Разбор';$('#ttl').textContent=S.title||'Задача';
+$('#tag').textContent=S.tag||L10N.tg;$('#ttl').textContent=S.title||L10N.tt;
 for(let i=0;i<N;i++){const k=document.createElement('div');k.className='tk';k.style.left=`calc(${(N>1?i/(N-1)*100:0)}% - 1px)`;$('#tl').appendChild(k)}
-$('#notes').innerHTML=`<div class="nh m">Пояснения · ${N} шагов</div>`+S.steps.map((s,i)=>`<div class="st" data-i="${i}"><span class="m k">${String(i+1).padStart(2,'0')}</span><div>${nt(s)}</div></div>`).join('');
-$('#doc').innerHTML=`<div class="dc"><div class="m">Конспект · ${S.tag||''}</div><h1>${S.title||''}</h1>`+S.steps.map((s,i)=>`<section class="row"><span class="m k">${String(i+1).padStart(2,'0')}</span><div><div class="m">${s.cap}</div>${nt(s)}</div><div class="th">${svgStatic(i)}</div></section>`).join('')+`</div>`;
+$('#notes').innerHTML=`<div class="nh m">${L10N.nh(N)}</div>`+S.steps.map((s,i)=>`<div class="st" data-i="${i}"><span class="m k">${String(i+1).padStart(2,'0')}</span><div>${noteHtml(s,i)}</div></div>`).join('');
+$('#doc').innerHTML=`<div class="dc"><div class="m">${L10N.sum} · ${S.tag||L10N.tg}</div><h1>${S.title||L10N.tt}</h1>`+S.steps.map((s,i)=>`<section class="row"><span class="m k">${String(i+1).padStart(2,'0')}</span><div><div class="m">${s.cap}</div>${noteHtml(s,i)}</div><div class="th">${svgStatic(i)}</div></section>`).join('')+`</div>`;
 if('IntersectionObserver'in window&&!RM){const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){io.unobserve(x.target);x.target.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'none'}],{duration:600,easing:OUT,fill:'backwards'})}}),{root:$('#doc'),threshold:.15});
   document.querySelectorAll('.row').forEach(r=>io.observe(r))}
-// события
 document.querySelectorAll('.t[data-m]').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
 $('#bp').onclick=()=>{stop();go(cur-1)};$('#bn').onclick=()=>{stop();go(cur+1)};$('#br').onclick=play;$('#bq').onclick=toggleChat;
 $('#notes').onclick=e=>{const s=e.target.closest('.st');if(s){stop();go(+s.dataset.i)}};
@@ -186,24 +215,24 @@ addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;const c=
   if(k==='ArrowRight'||c==='KeyD'){stop();go(cur+1)}else if(k==='ArrowLeft'||c==='KeyA'){stop();go(cur-1)}else if(k==='Home'){stop();go(0)}else if(k==='End'){stop();go(N-1)}else if(c==='KeyS')play();
   else if(c==='KeyQ'){e.preventDefault();toggleChat()}else if(k===' '){e.preventDefault();timer?stop():play()}else if(c==='Digit1')setMode('scene');else if(c==='Digit2')setMode('razbor');else if(c==='Digit3')setMode('konspekt')});
 addEventListener('pointerdown',()=>window.focus());
-window.__ponder={go,setMode,N,get cur(){return cur}};
+window.__ponder={go,setMode,N,lang:LANG,get cur(){return cur}};
 requestAnimationFrame(()=>{moveSw(false);requestAnimationFrame(()=>$('#sw').classList.add('a'))});addEventListener('resize',()=>moveSw(false));
-    // ===== ЧАТ «СПРОСИТЬ»: вызов Gemini API так же, как в примере Gemini (ключ подставляет Canvas) =====
+    // ===== AI TUTOR CHAT: localized context-aware Gemini API calls inside Canvas =====
 const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const clean=t=>t.replace(/\$/g,'').replace(/\\sqrt\{([^}]*)\}/g,'√($1)').replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g,'($1)/($2)').replace(/\\cdot/g,'·').replace(/\\times/g,'×').replace(/\\([a-zA-Z]+)/g,'$1').replace(/[{}]/g,'');
-const fmt=t=>esc(clean(t)).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/^\* /gm,'• ').replace(/→\s*шаг\w*\s*(\d+)/gi,'<a class="lk" data-s="$1">→ шаг $1</a>').replace(/\n/g,'<br>');
+const clean=t=>t.replace(/^(Конечно|Отличный вопрос|Хороший вопрос|Звісно|Чудове запитання|Sure|Of course|Great question|Certainly|¡Claro|Por supuesto|Bien sûr|Natürlich|もちろん|물론이죠|当然)[!,.:\s]*/i,'').replace(/\$/g,'').replace(/\\sqrt\{([^}]*)\}/g,'√($1)').replace(/\\frac\{([^}]*)\}\{([^}]*)\}/g,'($1)/($2)').replace(/\\cdot/g,'·').replace(/\\times/g,'×').replace(/\\([a-zA-Z]+)/g,'$1').replace(/[{}]/g,'').trim();
+const fmt=t=>esc(clean(t)).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/^\* /gm,'• ').replace(/→\s*(?:step|paso|passo|schritt|étape|шаг\w*|крок\w*|ステップ|단계|第)?\s*(\d+)\s*(?:步|단계)?/gi,(_,n)=>`<a class="lk" data-s="${n}">→ ${L10N.sw} ${n}</a>`).replace(/\n/g,'<br>');
 function say(cls,html){const d=document.createElement('div');d.className=cls;d.innerHTML=html;$('#log').appendChild(d);$('#log').scrollTop=1e9;
   if(D(1))d.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:D(380),easing:OUT});return d}
-async function ask(text){text=text.trim();if(!text)return;$('#inp').value='';say('q','› '+esc(text));const w=say('','<span class="m k">… думаю</span>');
+async function ask(text){text=text.trim();if(!text)return;$('#inp').value='';say('q','› '+esc(text));const w=say('','<span class="m k">'+L10N.thk+'</span>');
   const pulse=D(1)?w.animate([{opacity:.35},{opacity:1}],{duration:700,iterations:Infinity,direction:'alternate',easing:IO}):null;
   const st=S.steps[cur],plain=nt(st).replace(/<[^>]+>/g,' ');
-  const sys=`Ты репетитор внутри интерактивного разбора. Задача: ${S.title}, дано ${S.given}. Сейчас показан шаг ${cur+1} из ${N}: «${st.cap}». Пояснение шага: ${plain}. Отвечай по-русски, понятно и полно, не сокращай важное. Пиши простым текстом без markdown и без LaTeX: степени и корни записывай символами (², √, ·). Ссылаясь на шаг, пиши ровно «→ шаг 3».`;
+  const sys=`You are a math tutor inside an interactive step-by-step walkthrough. Problem: ${S.title}, given: ${S.given}. Currently viewing step ${cur+1} of ${N}: "${st.cap}". Step explanation: ${plain}. Respond strictly in the same language as the user's question (or the problem language "${LANG}" if ambiguous). Start directly with the explanation — never use conversational filler like "Sure!", "Great question!", or "Of course!". Explain clearly and thoroughly without cutting important details. Use plain text without Markdown headers or LaTeX: write powers and roots with Unicode symbols (², √, ·). When referring to another step, write exactly "→ ${L10N.sw} 3".`;
   hist.push({role:'user',parts:[{text}]});
   try{const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=',{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({contents:hist,systemInstruction:{parts:[{text:sys}]}})});
    const j=await r.json(),a=j?.candidates?.[0]?.content?.parts?.[0]?.text;if(!a)throw 0;hist.push({role:'model',parts:[{text:a}]});
    pulse&&pulse.cancel();w.innerHTML=fmt(a);if(D(1))w.animate([{opacity:0},{opacity:1}],{duration:D(380),easing:IO})}
-  catch(e){hist.pop();pulse&&pulse.cancel();w.innerHTML='<span class="m">Нет связи с моделью. Чат работает внутри Gemini Canvas, где ключ подставляется автоматически.</span>'}
+  catch(e){hist.pop();pulse&&pulse.cancel();w.innerHTML='<span class="m">'+L10N.err+'</span>'}
   $('#log').scrollTop=1e9}
 $('#snd').onclick=()=>ask($('#inp').value);$('#inp').onkeydown=e=>{if(e.key==='Enter')ask($('#inp').value)};
 $('.qa').innerHTML=S.quick.map(q=>`<button class="t">${q}</button>`).join('');
