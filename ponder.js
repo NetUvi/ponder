@@ -1,5 +1,6 @@
-// Ponder Engine CDN Bundle (auto-injects CSS, DOM shell, modules G & A, multilingual engine & AI tutor)
+// Ponder Engine v1.2.0 CDN Bundle (auto-injects CSS, DOM shell, modules G & A, multilingual engine & AI tutor)
 (function(){
+  window.PONDER_VERSION='1.2.0';
   window.BR='#d9a441';window.WH='#e9e4d6';window.MU='#a39d8c';window.FL='#3b3320';
   window.fr=(a,b)=>'<span class="fr"><span>'+a+'</span><span>'+b+'</span></span>';
   const st=document.createElement('style');
@@ -215,7 +216,7 @@ addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;const c=
   if(k==='ArrowRight'||c==='KeyD'){stop();go(cur+1)}else if(k==='ArrowLeft'||c==='KeyA'){stop();go(cur-1)}else if(k==='Home'){stop();go(0)}else if(k==='End'){stop();go(N-1)}else if(c==='KeyS')play();
   else if(c==='KeyQ'){e.preventDefault();toggleChat()}else if(k===' '){e.preventDefault();timer?stop():play()}else if(c==='Digit1')setMode('scene');else if(c==='Digit2')setMode('razbor');else if(c==='Digit3')setMode('konspekt')});
 addEventListener('pointerdown',()=>window.focus());
-window.__ponder={go,setMode,N,lang:LANG,get cur(){return cur}};
+window.__ponder={version:'1.2.0',go,setMode,N,lang:LANG,get cur(){return cur}};
 requestAnimationFrame(()=>{moveSw(false);requestAnimationFrame(()=>$('#sw').classList.add('a'))});addEventListener('resize',()=>moveSw(false));
     // ===== AI TUTOR CHAT: localized context-aware Gemini API calls inside Canvas =====
 const esc=t=>t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
